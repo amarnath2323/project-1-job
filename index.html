@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>JobTrack Pro | Career Management System</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand"><div class="logo">JT</div><div><b>JobTrack Pro</b><small>Career Management</small></div></div>
+ <div class="profile"><div class="avatar">A</div><div><b>Amarnath</b><small>Computer Science Student</small></div></div>
+ <nav>
+  <button class="nav active" data-page="dashboard">⌂ <span>Dashboard</span></button>
+  <button class="nav" data-page="applications">▣ <span>Applications</span></button>
+  <button class="nav" data-page="interviews">◷ <span>Interviews</span></button>
+  <button class="nav" data-page="analytics">◈ <span>Analytics</span></button>
+  <button class="nav" data-page="profile">◎ <span>Profile</span></button>
+ </nav>
+ <div class="sidefoot"><button id="export">⇩ Export Database</button><button id="clear" class="danger">⌫ Reset Demo Data</button></div>
+</aside>
+
+<main>
+<header><div><div class="mobilebrand">JT</div><p class="eyebrow">CAREER MANAGEMENT SYSTEM</p><h1 id="title">Dashboard</h1><p class="muted">Manage your complete job search journey in one place.</p></div><button class="primary" id="addTop">＋ New Application</button></header>
+
+<section id="dashboard" class="page active">
+ <div class="hero"><div><p class="eyebrow">YOUR CAREER PIPELINE</p><h2>Stay organized. Get hired.</h2><p>Track applications, prepare for interviews and monitor your progress.</p></div><div class="heroIcon">⌁</div></div>
+ <div class="stats">
+  <div class="stat"><span class="blue">▣</span><div><small>Total Applications</small><b id="total">0</b><em id="totalChange">All records</em></div></div>
+  <div class="stat"><span class="orange">◷</span><div><small>Interviews</small><b id="interviews">0</b><em>Scheduled</em></div></div>
+  <div class="stat"><span class="green">✓</span><div><small>Selected</small><b id="selected">0</b><em>Offers</em></div></div>
+  <div class="stat"><span class="purple">%</span><div><small>Success Rate</small><b id="success">0%</b><em>Selection rate</em></div></div>
+ </div>
+ <div class="three">
+  <div class="card wide"><div class="cardhead"><div><h2>Recent Applications</h2><p class="muted">Latest activity</p></div><button class="link" onclick="page('applications')">View all →</button></div><div id="recent"></div></div>
+  <div class="card"><h2>Pipeline</h2><p class="muted">Application stages</p><div id="pipeline"></div></div>
+ </div>
+</section>
+
+<section id="applications" class="page">
+ <div class="toolbar"><div class="search">⌕ <input id="search" placeholder="Search company, role, location..."></div><select id="filter"><option value="">All Statuses</option><option>Applied</option><option>Interview</option><option>Selected</option><option>Rejected</option></select><button class="primary" id="add">＋ Add</button></div>
+ <div class="card tablecard"><div class="tablewrap"><table><thead><tr><th>Company</th><th>Position</th><th>Location</th><th>Applied</th><th>Status</th><th>Interview</th><th>Actions</th></tr></thead><tbody id="table"></tbody></table></div><div id="empty" class="empty">No applications match your search.</div></div>
+</section>
+
+<section id="interviews" class="page">
+ <div class="card"><div class="cardhead"><div><h2>Interview Center</h2><p class="muted">Prepare for your upcoming opportunities.</p></div><button class="primary" onclick="page('applications')">Manage Applications</button></div><div id="interviewList" class="interviewgrid"></div><div id="noInterview" class="empty">No interviews scheduled yet.</div></div>
+</section>
+
+<section id="analytics" class="page">
+ <div class="stats threeStats"><div class="stat"><div><small>Response Rate</small><b id="response">0%</b><em>Applications progressed</em></div></div><div class="stat"><div><small>Selection Rate</small><b id="selectionRate">0%</b><em>Overall success</em></div></div><div class="stat"><div><small>Active Applications</small><b id="active">0</b><em>Applied + Interview</em></div></div></div>
+ <div class="two"><div class="card"><h2>Status Distribution</h2><div id="bars"></div></div><div class="card"><h2>Career Insights</h2><div class="insights"><div><b id="topCompany">—</b><small>Most applied company</small></div><div><b id="nextInterview">—</b><small>Next interview</small></div><div><b id="trackedDays">0</b><small>Applications tracked</small></div></div></div></div>
+</section>
+
+<section id="profile" class="page">
+ <div class="card profilepage"><div class="bigavatar">A</div><h2>Amarnath</h2><p class="muted">B.Tech Computer Science & Engineering</p><div class="profilegrid"><div><small>Email</small><b>amarnath010@gmail.com</b></div><div><small>Career Goal</small><b>Software Engineer</b></div><div><small>Primary Skills</small><b>Java · Python · SQL · AI</b></div><div><small>Project</small><b>Job Application Tracking System</b></div></div></div>
+</section>
+</main>
+</div>
+
+<div id="modal" class="modal"><div class="modalbox">
+<div class="modalhead"><div><p class="eyebrow">APPLICATION RECORD</p><h2 id="modalTitle">Add Application</h2></div><button id="close" class="close">×</button></div>
+<form id="form"><input type="hidden" id="edit">
+<div class="formgrid">
+<label>Company Name *<input id="company" required placeholder="Google"></label>
+<label>Job Role *<input id="role" required placeholder="Software Engineer"></label>
+<label>Location<input id="location" placeholder="Chennai / Remote"></label>
+<label>Applied Date *<input id="date" type="date" required></label>
+<label>Status<select id="status"><option>Applied</option><option>Interview</option><option>Selected</option><option>Rejected</option></select></label>
+<label>Interview Date<input id="interviewDate" type="date"></label>
+<label>Job Link<input id="jobLink" type="url" placeholder="https://..."></label>
+<label>Salary / CTC<input id="salary" placeholder="e.g. 8 LPA"></label>
+<label class="full">Notes<textarea id="notes" rows="3" placeholder="Recruiter details, preparation notes, next steps..."></textarea></label>
+</div><div class="modalactions"><button type="button" class="secondary" id="cancel">Cancel</button><button class="primary">Save Application</button></div>
+</form></div></div>
+<div id="toast"></div><script src="script.js"></script>
+</body></html>
